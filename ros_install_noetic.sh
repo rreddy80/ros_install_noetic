@@ -241,3 +241,15 @@ sudo apt-get install libc6 libgcc-s1 libilmbase-dev libopencv-calib3d-dev libope
 #libgphoto2-6:i386 libsane:i386 libwine:i386 wine32:i386
 # and finally try installing the opencv-bridge
 sudo apt install ros-noetic-cv-bridge
+
+## install nav_msgs package
+sudo apt install ros-melodic-nav-msgs
+# install FLANN package
+sudo apt-get install libflann-dev
+
+## install point cloud library
+git clone https://github.com/PointCloudLibrary/pcl.git
+cd pcl && mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j2
+sudo make -j2 install
