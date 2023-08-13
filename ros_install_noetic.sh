@@ -158,6 +158,11 @@ echo ""
 echo "source /opt/ros/${name_ros_distro}/setup.bash" >> /home/$user_name/.bashrc
 source /home/$user_name/.bashrc
 sudo apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+#For repeat installations, sources file might already be added that needs removing before running rosdep init command
+if [ -d /etc/ros/rosdep/sources.list.d/ ]; then
+  echo ">>> {sources.list.d directory exists: remove it before initialising again}"
+  sudo rm -rf /etc/ros/rosdep/sources.list.d/
+fi
 sudo rosdep init
 rosdep update
 echo ""
@@ -168,7 +173,7 @@ echo ">>> {Type [ rosversion -d ] to get the current ROS installed version}"
 echo ""
 echo "#######################################################################################################################"
 
-
+sudo apt-get -y install python3-pip
 pip3 install opencv-python
 sudo apt install --reinstall gdal-bin libgdal-dev python3-gdal
 
