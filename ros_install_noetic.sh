@@ -196,6 +196,7 @@ sudo apt-get install libsuitesparse-dev
 
 
 ### build, test, and install Ceres.
+wget http://ceres-solver.org/ceres-solver-2.1.0.tar.gz
 tar zxf ceres-solver-2.1.0.tar.gz
 mkdir ceres-bin
 cd ceres-bin
