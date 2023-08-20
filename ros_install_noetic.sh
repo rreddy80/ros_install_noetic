@@ -175,24 +175,24 @@ echo "##########################################################################
 
 sudo apt-get -y install python3-pip
 pip3 install opencv-python
-sudo apt install --reinstall gdal-bin libgdal-dev python3-gdal
+sudo apt install -y --reinstall gdal-bin libgdal-dev python3-gdal
 
 # I got errors install this package about dependant packages
 # sudo apt-get install ros-noetic-cv-bridge
 
-sudo apt-get install ros-${name_ros_distro}-tf ros-${name_ros_distro}-message-filters ros-${name_ros_distro}-image-transport
+sudo apt-get install -y ros-${name_ros_distro}-tf ros-${name_ros_distro}-message-filters ros-${name_ros_distro}-image-transport
 
 ### As part of Ceres installation http://ceres-solver.org/installation.html#linux
 # CMake
-sudo apt-get install cmake
+sudo apt-get install -y cmake
 # google-glog + gflags
-sudo apt-get install libgoogle-glog-dev libgflags-dev
+sudo apt-get install -y libgoogle-glog-dev libgflags-dev
 # Use ATLAS for BLAS & LAPACK
-sudo apt-get install libatlas-base-dev
+sudo apt-get install -y libatlas-base-dev
 # Eigen3
-sudo apt-get install libeigen3-dev
+sudo apt-get install -y libeigen3-dev
 # SuiteSparse (optional)
-sudo apt-get install libsuitesparse-dev
+sudo apt-get install -y libsuitesparse-dev
 
 
 ### build, test, and install Ceres.
@@ -202,16 +202,17 @@ mkdir ceres-bin
 cd ceres-bin
 cmake ../ceres-solver-2.1.0
 make -j3
-make test
+# make test
 # Optionally install Ceres, it can also be exported using CMake which
 # allows Ceres to be used without requiring installation, see the documentation
 # for the EXPORT_BUILD_DIR option for more information.
-make install
+sudo make install
 
 ## source bash profile to make sure following commands can find the packages
 source /home/$user_name/.bashrc
 
 ## OpenCV installation
+cd ..
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.x.zip
 unzip opencv.zip
 mv opencv-4.x opencv
@@ -226,9 +227,8 @@ make -j4
 # will install openCV to /usr/local/
 sudo make install
 
-
-
 ## Boost package installation
+cd ..
 wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
 mkdir boost-ver && cd boost-ver
 tar -xzf ../boost_*.tar.gz
@@ -240,18 +240,18 @@ sudo ./b2 install
 
 ## install cv-bridge now
 # first install all dependencies for libboost-dev
-sudo apt-get install libboost-atomic-dev libboost-chrono-dev libboost-container-dev libboost-context-dev libboost-coroutine-dev libboost-date-time-dev libboost-dev libboost-exception-dev libboost-fiber-dev libboost-filesystem-dev libboost-graph-dev libboost-graph-parallel-dev libboost-iostreams-dev libboost-locale-dev libboost-log-dev libboost-math-dev libboost-mpi-dev libboost-mpi-python-dev libboost-numpy-dev libboost-program-options-dev libboost-python-dev libboost-random-dev libboost-regex-dev libboost-serialization-dev libboost-stacktrace-dev libboost-system-dev libboost-test-dev libboost-thread-dev libboost-timer-dev libboost-tools-dev libboost-type-erasure-dev libboost-wave-dev libboost-mpi1.71-dev libboost-mpi-python1.71-dev mpi-default-dev libopenmpi-dev libibverbs-dev libnl-3-200=3.4.0-1 libnl-route-3-200=3.4.0-1 libnl-3-dev libnl-route-3-dev
+sudo apt-get install -y libboost-atomic-dev libboost-chrono-dev libboost-container-dev libboost-context-dev libboost-coroutine-dev libboost-date-time-dev libboost-dev libboost-exception-dev libboost-fiber-dev libboost-filesystem-dev libboost-graph-dev libboost-graph-parallel-dev libboost-iostreams-dev libboost-locale-dev libboost-log-dev libboost-math-dev libboost-mpi-dev libboost-mpi-python-dev libboost-numpy-dev libboost-program-options-dev libboost-python-dev libboost-random-dev libboost-regex-dev libboost-serialization-dev libboost-stacktrace-dev libboost-system-dev libboost-test-dev libboost-thread-dev libboost-timer-dev libboost-tools-dev libboost-type-erasure-dev libboost-wave-dev libboost-mpi1.71-dev libboost-mpi-python1.71-dev mpi-default-dev libopenmpi-dev libibverbs-dev libnl-3-200=3.4.0-1 libnl-route-3-200=3.4.0-1 libnl-3-dev libnl-route-3-dev
 # and all dependencies for libopencv-dev
-sudo apt-get install libc6 libgcc-s1 libilmbase-dev libopencv-calib3d-dev libopencv-calib3d4.2 libopencv-contrib-dev libopencv-contrib4.2 libopencv-core-dev libopencv-core4.2 libopencv-dnn-dev libopencv-features2d-dev libopencv-features2d4.2 libopencv-flann-dev libopencv-highgui-dev libopencv-highgui4.2 libopencv-imgcodecs-dev libopencv-imgcodecs4.2 libopencv-imgproc-dev libopencv-imgproc4.2 libopencv-ml-dev libopencv-objdetect-dev libopencv-photo-dev libopencv-shape-dev libopencv-stitching-dev libopencv-superres-dev libopencv-ts-dev libopencv-video-dev libopencv-videoio-dev libopencv-videoio4.2 libopencv-videostab-dev libopencv-viz-dev libopencv4.2-java libstdc++6 libgphoto2-dev libgphoto2-6=2.5.24-1
+sudo apt-get install -y libc6 libgcc-s1 libilmbase-dev libopencv-calib3d-dev libopencv-calib3d4.2 libopencv-contrib-dev libopencv-contrib4.2 libopencv-core-dev libopencv-core4.2 libopencv-dnn-dev libopencv-features2d-dev libopencv-features2d4.2 libopencv-flann-dev libopencv-highgui-dev libopencv-highgui4.2 libopencv-imgcodecs-dev libopencv-imgcodecs4.2 libopencv-imgproc-dev libopencv-imgproc4.2 libopencv-ml-dev libopencv-objdetect-dev libopencv-photo-dev libopencv-shape-dev libopencv-stitching-dev libopencv-superres-dev libopencv-ts-dev libopencv-video-dev libopencv-videoio-dev libopencv-videoio4.2 libopencv-videostab-dev libopencv-viz-dev libopencv4.2-java libstdc++6 libgphoto2-dev libgphoto2-6=2.5.24-1
 ## this might remove following packages that can be installed later, if needed
 #libgphoto2-6:i386 libsane:i386 libwine:i386 wine32:i386
 # and finally try installing the opencv-bridge
-sudo apt install ros-noetic-cv-bridge
+sudo apt install -y ros-noetic-cv-bridge
 
 ## install nav_msgs package
-sudo apt install ros-melodic-nav-msgs
+sudo apt install -y ros-melodic-nav-msgs
 # install FLANN package
-sudo apt-get install libflann-dev
+sudo apt-get install -y libflann-dev
 
 ## install point cloud library
 git clone https://github.com/PointCloudLibrary/pcl.git
